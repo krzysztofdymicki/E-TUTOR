@@ -32,5 +32,18 @@ usersRouter.get('/', async (request, response) => {
 	response.json(users.map(u => u.toJSON()))
 })
 
+// GET SPECIFIC USER
+
+usersRouter.get('/:id', async (request, response) => {
+	const id = request.params.id
+	const user = await User.findById(id)
+
+	if(user) {
+		response.status(200).json(user.toJSON())
+	}else {
+		response.status(404).json({error: 'User with this ID doesnt exists'}).end()
+	}
+})
+
 
 module.exports = usersRouter
