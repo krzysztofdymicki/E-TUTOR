@@ -1,6 +1,7 @@
 const config = require('./utils/config')
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const mongoose = require('mongoose')
 
 console.log('Connecting to mongoDB')
@@ -12,5 +13,8 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology
 	.catch((error) => {
 		console.log('error with connecting to mongoDB', error.message)
 	})
+
+app.use(cors())
+app.use(express.json())
 
 module.exports = app
