@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema({
 	},
 	name: String,
 	passwordHash: String,
+	tutor: {
+		type: Boolean,
+		default: false
+	}
 }
 )
 
