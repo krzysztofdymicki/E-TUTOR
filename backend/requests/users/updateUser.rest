@@ -1,0 +1,1 @@
+PUT http://localhost:3001/api/users/5ecbcb4d7aa79e3727d446a6/update/isTutor-true

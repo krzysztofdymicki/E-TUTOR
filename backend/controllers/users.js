@@ -22,7 +22,7 @@ usersRouter.post('/signup', async (request, response) => {
     
 	const savedUser = await user.save()
 
-	response.status(400).json(savedUser)
+	response.status(201).json(savedUser)
 })
 
 // GET ALL USERS
@@ -52,6 +52,26 @@ usersRouter.delete('/:id', async (request, response) => {
 	await User.findByIdAndDelete(id)
 
 	response.status(200).end()
+})
+
+// UPDATE USER (PARAM - VALUE)
+
+usersRouter.put('/:id/update/:key-:value', async (request, response) => {
+	const params = request.params
+	const id = params.id
+	const value = params.value
+	const key = params.key
+	let keyValueToUpdate = {}
+	
+	if(key === 'isTutor') {
+		keyValueToUpdate = {
+			isTutor: value === 'true'? true : false
+		}
+	}
+
+
+	const updatedUser = await User.findByIdAndUpdate(id, keyValueToUpdate)
+	response.status(200).json(updatedUser.toJSON())
 })
 
 
