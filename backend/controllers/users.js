@@ -63,11 +63,7 @@ usersRouter.put('/:id/update/:key-:value', async (request, response) => {
 	const key = params.key
 	let keyValueToUpdate = {}
 	
-	if(key === 'isTutor') {
-		keyValueToUpdate = {
-			isTutor: value === 'true'? true : false
-		}
-	}
+	// if (key === .....)
 
 
 	const updatedUser = await User.findByIdAndUpdate(id, keyValueToUpdate)

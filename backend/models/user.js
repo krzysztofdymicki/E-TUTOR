@@ -10,10 +10,10 @@ const userSchema = new mongoose.Schema({
 	},
 	name: String,
 	passwordHash: String,
-	isTutor: {
-		type: Boolean,
-		required: true,
-		default: false
+	tutor: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Tutor',
+		default: {}
 	}
 }
 )
