@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/subjects
+Content-Type: application/json
+
+{
+    "name": "Math",
+    "level": "pre-primary",
+    "category": "science"
+}

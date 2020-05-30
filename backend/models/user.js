@@ -13,6 +13,10 @@ const userSchema = new mongoose.Schema({
   tutor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Tutor'
+  },
+  admin: {
+    type: Boolean,
+    default: false
   }
 }
 )

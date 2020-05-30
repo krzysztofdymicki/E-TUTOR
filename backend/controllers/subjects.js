@@ -3,13 +3,25 @@ const Subject = require('../models/subject')
 
 // CREATE NEW SUBJECT (WITH LEVEL)
 
+subjectsRouter.post('/', async (request, response) => {
+  const body = request.body
+
+  const newSubject = new Subject({
+    ...body
+  })
+
+  const savedSubject = await newSubject.save()
+
+  response.status(200).json(savedSubject.toJSON())
+})
+
 
 // GET ALL SUBJECTS
 
 subjectsRouter.get('/', async (request, response) => {
   const subjects = await Subject.find({})
 
-  response.send(200).json(subjects.map(s => s.toJSON()))
+  response.status(200).json(subjects.map(s => s.toJSON()))
 })
 
 // GET SPECIFIC SUBJECTS (BY ID)
@@ -18,7 +30,7 @@ subjectsRouter.get('/:id', async (request, response) => {
   const id = request.params.id
   const subject = Subject.findById(id) 
 
-  response.send(200).json(subject.toJSON)
+  response.status(200).json(subject.toJSON)
 })
 
 // UPDATE SUBJECT
@@ -29,7 +41,7 @@ subjectsRouter.put('/:id/update', async (request, response) => {
 
   const updatedSubject = await Subject.findByIdAndUpdate(id, body, { new: true })
 
-  response.send(200).json(updatedSubject.toJSON())
+  response.status(200).json(updatedSubject.toJSON())
 })
 
 // DELETE SUBJECT
