@@ -1,4 +1,6 @@
+const config = require('../utils/config')
 const bcrypt = require('bcrypt')
+const mongoose = require('mongoose')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 
@@ -14,15 +16,37 @@ usersRouter.post('/signup', async (request, response) => {
   const saltRounds = 10
   const passwordHash = await bcrypt.hash(body.password, saltRounds)
 
+  //CREATE ADMIN ACCOUNT
+
+  if(body.admin === true && body.keyForAdminAccount === config.KEY_FOR_ADMIN_ACCOUNT) {
+    const admin = new User({
+      username: body.username,
+      name: body.name,
+      passwordHash,
+      admin: true
+    })
+
+    const savedAdmin = await admin.save()
+    response.status(201).json(savedAdmin.toJSON())
+  }
+
+  //CREATE BASIC ACCOUNT
+
+  console.log(body)
+
   const user = new User({
     username: body.username,
     name: body.name,
-    passwordHash
+    passwordHash,
+    admin: false,
+    messages: [
+      { author: new mongoose.Types.ObjectId('5ed29517735855437e0fca63'), content: 'Welcome!', date: new Date() }
+    ]
   })
     
   const savedUser = await user.save()
 
-  response.status(201).json(savedUser)
+  response.status(201).json(savedUser.toJSON())
 })
 
 // GET ALL USERS

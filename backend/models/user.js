@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
+const messageSchema = require('./schemas/message')
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -17,6 +18,9 @@ const userSchema = new mongoose.Schema({
   admin: {
     type: Boolean,
     default: false
+  },
+  messages: {
+    type: [messageSchema]
   }
 }
 )

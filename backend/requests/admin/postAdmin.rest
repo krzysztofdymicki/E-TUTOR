@@ -1,0 +1,10 @@
+POST http://localhost:3001/api/users/signup
+Content-Type: application/json
+
+{
+    "username": "notadminforsure",
+    "password": "notadminforsure",
+    "name": "notadminforsure",
+    "admin": "true",
+    "keyForAdminAccount": "secretforadmin2"
+}
