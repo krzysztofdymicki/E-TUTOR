@@ -11,9 +11,22 @@ const userSchema = new mongoose.Schema({
   },
   name: String,
   passwordHash: String,
-  tutor: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Tutor'
+  subjectsTeached: [  
+    {
+      subject: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Subject'
+      },
+      price: {
+        type: Number,
+        min: [1, 'Too less, 1$ min'],
+        max: [1000, 'Too much, 1000$ max.']
+      }
+    }
+  ],
+  aboutMe: {
+    type: String,
+    maxlength: 800
   },
   admin: {
     type: Boolean,

@@ -2,8 +2,7 @@ POST http://localhost:3001/api/users/signup
 Content-Type: application/json
 
 {
-    "username": "UserWithMessage",
-    "name": "UserWithMessage",
-    "password": "UserWithMessage",
-    "admin": false,
+    "username": "cipacipa",
+    "password": "cipacipa",
+    "name": "cipacipa"
 }
